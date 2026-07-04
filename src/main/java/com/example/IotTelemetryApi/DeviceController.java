@@ -3,6 +3,7 @@ package com.example.IotTelemetryApi;
 import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/devices")
@@ -17,7 +18,7 @@ public class DeviceController {
 
 
     @PostMapping
-    public Device createDevice(@RequestBody Device device) {
+    public Device createDevice(@Valid @RequestBody Device device) {
         device.setLastSeen(Instant.now());
         return repository.save(device);
     }
@@ -31,6 +32,7 @@ public class DeviceController {
 
     @GetMapping("/{id}")
     public Device getDevice(@PathVariable Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id)
+                .orElseThrow(() -> new DeviceNotFoundException(id));
     }
 }
