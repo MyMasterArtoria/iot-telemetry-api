@@ -41,7 +41,7 @@ class IotTelemetryApiApplicationTests {
 
 	@Test
 	void createDeviceWithBlankName_returns400() throws Exception {
-		String json = "{\"type\":\"temperature\"}"; // 故意不给 name
+		String json = "{\"type\":\"temperature\"}"; // no name
 		mockMvc.perform(post("/devices")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(json))
