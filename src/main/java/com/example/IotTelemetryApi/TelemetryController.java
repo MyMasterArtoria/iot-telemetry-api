@@ -33,7 +33,7 @@ public class TelemetryController {
         reading.setValue(request.getValue());
         reading.setTimestamp(Instant.now());
 
-        // 顺便更新设备的 lastSeen
+        // update lastSeen
         device.setLastSeen(Instant.now());
         deviceRepository.save(device);
 
